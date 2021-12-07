@@ -18,7 +18,7 @@ export default function App({ children, title }) {
 
     return (
         <div>
-            <Head title={`${title} | Najmul Faiz`} />
+            <Head title={`${title} | Aplikasi Manajemen Keuangan`} />
             <div id="layout-wrapper">
                 <Header/>
                 <Sidebar/>
