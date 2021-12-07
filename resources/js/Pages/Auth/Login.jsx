@@ -1,0 +1,62 @@
+import { Inertia } from '@inertiajs/inertia'
+import { Link } from '@inertiajs/inertia-react'
+import React, { useState } from 'react'
+import Guest from '../../Layouts/Guest'
+
+export default function Login({ errors }) {
+    const [values, setValues] = useState({
+        email: '', password: '', remember: ''
+    })
+
+    const changeHandler = (e) => {
+        setValues({ ...values, [e.target.id]: e.target.value })
+    }
+
+    const submitHandler = (e) => {
+        e.preventDefault();
+
+        Inertia.post(route('login'), values);
+    }
+
+    return (
+        <>
+            <div className="row justify-content-center">
+                <div className="col-md-8 col-lg-6 col-xl-5">
+                    <h4 className="text-center mb-3">Aplikasi Manajemen Keuangan</h4>
+                    <div className="card overflow-hidden">
+                        <div className="card-body">
+                            <div className="p-2">
+                                <form className="form-horizontal" onSubmit={submitHandler}>
+                                    <div className="mb-3">
+                                        <label htmlFor="email" className="form-label">E-Mail</label>
+                                        <input type="email" name="email" id="email" className="form-control" placeholder="Enter E-Mail" value={values.email} onChange={changeHandler} />
+                                        {errors.email && (<div className="text-danger mt-1">{errors.email}</div>)}
+                                    </div>
+                                    <div className="mb-3">
+                                        <label className="form-label">Password</label>
+                                        <div className="input-group auth-pass-inputgroup">
+                                            <input type="password" name="password" id="password" className="form-control" placeholder="Enter Password" aria-label="Password" aria-describedby="password-addon" value={values.password} onChange={changeHandler} />
+                                            <button className="btn btn-light" type="button" id="password-addon"><i className="mdi mdi-eye-outline" /></button>
+                                        </div>
+                                        {errors.password && (<div className="text-danger mt-1">{errors.password}</div>)}
+                                    </div>
+                                    <div className="form-check">
+                                        <input className="form-check-input" type="checkbox" id="remember" name="remember" value={values.checkbox} onChange={(e) => setValues({ ...values, 'remember': e.target.checked })} />
+                                        <label className="form-check-label" htmlFor="remember-check">
+                                            Remember me
+                                        </label>
+                                    </div>
+                                    <div className="mt-3 d-grid">
+                                        <button className="btn btn-primary waves-effect waves-light" type="submit">Log In</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </>
+    )
+}
+
+Login.layout = (page) => <Guest children={page} title="Login" />
