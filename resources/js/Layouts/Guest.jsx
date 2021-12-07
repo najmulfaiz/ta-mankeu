@@ -16,7 +16,7 @@ export default function Guest({ children, title }) {
 
     return (
         <>
-            <Head title={`${title} | Najmul Faiz`} />
+            <Head title={`${title} | Aplikasi Manajemen Keuangan`} />
             <div className="account-pages my-5 pt-sm-5">
                 <div className="container">
                     <Toaster />
